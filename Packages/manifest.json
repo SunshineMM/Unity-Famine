@@ -2,11 +2,19 @@
   "dependencies": {
     "com.spoiledcat.git": "1.0.27",
     "com.unity.collab-proxy": "2.4.4",
+<<<<<<< HEAD
     "com.unity.feature.development": "1.0.2",
     "com.unity.timeline": "1.8.6",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.4",
     "com.unity.modules.accessibility": "1.0.0",
+=======
+    "com.unity.feature.development": "1.0.1",
+    "com.unity.textmeshpro": "3.0.6",
+    "com.unity.timeline": "1.7.6",
+    "com.unity.ugui": "1.0.0",
+    "com.unity.visualscripting": "1.9.4",
+>>>>>>> 022d24aabc3d2be103fa2af298ca834e3eb209a9
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
