@@ -35,7 +35,7 @@ public class PlayerController : BaseObject
             Move();
             Attack();
         }else{
-            //攻击过程中
+            //攻击过程中 test
             transform.localRotation = Quaternion.Slerp(transform.localRotation,quaternion,Time.deltaTime * 10);
         }
      
