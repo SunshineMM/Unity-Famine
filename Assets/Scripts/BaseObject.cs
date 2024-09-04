@@ -9,13 +9,37 @@ using UnityEngine;
 public class BaseObject : MonoBehaviour
 {
 
-    public float hp;
+    private float hp;
     public AudioSource audioSource;
     public List<AudioClip> audioClips;
     public GameObject lootObject; //掉落的物品
 
+    // Hp修改时自动判断死亡
+    public float Hp { get => hp;
+        set {
+            hp = value;
+            if(hp<=0){
+                hp = 0;
+                Dead();
+            }
+            OnHpUpdate(); //自动调用Hp更新逻辑
+        }
+    }
+
     protected void PlayAudio(int index){
         audioSource.PlayOneShot(audioClips[index]);
+    }
+
+    /// <summary>
+    /// 当生命值更新自动调用
+    /// </summary>
+    protected virtual void OnHpUpdate(){}
+
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    protected virtual void Dead(){
+
     }
 
     // Start is called before the first frame update

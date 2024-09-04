@@ -14,6 +14,10 @@ public class PlayerController : BaseObject
 
     private bool isAttacking = false;
 
+    private float hungry = 100f;
+
+    public float Hungry { get => hungry; set => hungry = value; }
+
     private void Awake() {
         Instance = this;
     }
@@ -75,6 +79,12 @@ public class PlayerController : BaseObject
 
             }
         }
+    }
+
+    protected override void OnHpUpdate()
+    {
+        //更新血条
+
     }
 
     #region 动画事件
