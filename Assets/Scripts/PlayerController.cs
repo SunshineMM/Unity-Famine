@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class PlayerController : BaseObject
 {
@@ -16,7 +17,22 @@ public class PlayerController : BaseObject
 
     private float hungry = 100f;
 
-    public float Hungry { get => hungry; set => hungry = value; }
+    public float Hungry { get => hungry; 
+    set{
+        hungry = value;
+            if (hungry <= 0)
+            {
+                hungry = 0;
+                //衰减Hp
+                Hp -= Time.deltaTime / 2;
+            }
+            //更新饥饿值UI
+            hungryImg.fillAmount = hungry / 100;
+        } 
+    }
+
+    public Image hpImg;
+    public Image hungryImg;
 
     private void Awake() {
         Instance = this;
@@ -31,6 +47,7 @@ public class PlayerController : BaseObject
     // Update is called once per frame
     void Update()
     {
+        UpdateHungry();
         if(!isAttacking){
             Move();
             Attack();
@@ -81,10 +98,17 @@ public class PlayerController : BaseObject
         }
     }
 
+    /// <summary>
+    /// 更新饥饿值
+    /// </summary>
+    private void UpdateHungry(){
+        Hungry -= Time.deltaTime * 3;
+    }
+
     protected override void OnHpUpdate()
     {
         //更新血条
-
+        hpImg.fillAmount = Hp / 100;
     }
 
     #region 动画事件

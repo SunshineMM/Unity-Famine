@@ -9,7 +9,7 @@ using UnityEngine;
 public class BaseObject : MonoBehaviour
 {
 
-    private float hp;
+    public float hp;
     public AudioSource audioSource;
     public List<AudioClip> audioClips;
     public GameObject lootObject; //掉落的物品
@@ -18,11 +18,14 @@ public class BaseObject : MonoBehaviour
     public float Hp { get => hp;
         set {
             hp = value;
+
+            //检测死亡
             if(hp<=0){
                 hp = 0;
                 Dead();
             }
-            OnHpUpdate(); //自动调用Hp更新逻辑
+            //自动调用Hp更新逻辑
+            OnHpUpdate(); 
         }
     }
 
