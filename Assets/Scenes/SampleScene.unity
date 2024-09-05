@@ -253,10 +253,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 8e7ca991d13d9104182fa827d6c00bf6, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1097,10 +1097,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3ea1f9e77ba48cb4d96c41d66add749e, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1277,6 +1277,14 @@ PrefabInstance:
       propertyPath: hp
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7876990541055749820, guid: 7a682d5f5ae17fa408d6e4a7d4283825, type: 3}
+      propertyPath: hpImg
+      value: 
+      objectReference: {fileID: 164037329}
+    - target: {fileID: 7876990541055749820, guid: 7a682d5f5ae17fa408d6e4a7d4283825, type: 3}
+      propertyPath: hungryImg
+      value: 
+      objectReference: {fileID: 1914263072}
     - target: {fileID: 7876990541055749820, guid: 7a682d5f5ae17fa408d6e4a7d4283825, type: 3}
       propertyPath: audioSource
       value: 
