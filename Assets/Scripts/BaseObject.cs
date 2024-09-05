@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 
@@ -42,7 +43,15 @@ public class BaseObject : MonoBehaviour
     /// 死亡
     /// </summary>
     protected virtual void Dead(){
+        
+    }
 
+    /// <summary>
+    /// 受伤
+    /// </summary>
+    public virtual void Hurt(int damage){
+        Hp -= damage;
+        
     }
 
     // Start is called before the first frame update
