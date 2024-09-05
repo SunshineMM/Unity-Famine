@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/// <summary>
-/// 检测碰撞物体
-/// </summary>
+
 public class CheckController : MonoBehaviour
 {
     private BaseObject owner;
@@ -43,8 +41,11 @@ public class CheckController : MonoBehaviour
             //此次伤害还没有检测过这个单位
             if (!lastAttackObjectList.Contains(other.gameObject))
             {
-                lastAtt
             }
         }
+    }
+
+    private void Start() {
+        
     }
 }
