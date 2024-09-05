@@ -9,7 +9,7 @@ public class PlayerController : BaseObject
     public static PlayerController Instance;
     public Animator animator;
     public CharacterController characterController;
-
+    public CheckController checkController;
     public float moveSpeed = 1;
     private Quaternion quaternion;
 
@@ -36,6 +36,8 @@ public class PlayerController : BaseObject
 
     private void Awake() {
         Instance = this;
+        //初始化检测器
+        checkController.Init(this,30);
     }
 
     // Start is called before the first frame update
@@ -116,11 +118,13 @@ public class PlayerController : BaseObject
         //播放音效
         PlayAudio(0);
         //攻击检测
+        checkController.StartHIt();
     }
     
     private void StopHit(){
         //停止攻击检测
         isAttacking =  false;
+        checkController.StopHit();
     }
     #endregion
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,11 @@ using UnityEngine;
 public class CheckController : MonoBehaviour
 {
     private BaseObject owner;
-    public int damge;
+    private int damge;
     private bool canAttack = false;
 
+    public List<String> enemyTags = new List<string>();
+    public List<String> itemTags = new List<string>();
     public void Init(BaseObject owner, int damage)
     {
         this.damge = damage;
@@ -28,20 +31,30 @@ public class CheckController : MonoBehaviour
     public void StopHit()
     {
         canAttack = false;
-
+        lastAttackObjectList.Clear();
     }
 
 
     private List<GameObject> lastAttackObjectList = new List<GameObject>();
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         //如果当前允许伤害检测
         if (canAttack)
         {
-            //此次伤害还没有检测过这个单位
-            if (!lastAttackObjectList.Contains(other.gameObject))
+            //此次伤害还没有检测过这个单位 && 标签包含在敌人列表中
+            if (!lastAttackObjectList.Contains(other.gameObject) && enemyTags.Contains(other.tag))
             {
+                lastAttackObjectList.Add(other.gameObject);
+                //具体的伤害逻辑
+                other.GetComponent<BaseObject>().Hurt(damge);
             }
+            return;
+        }
+
+        //检测拾取
+        if(itemTags.Contains(other.tag)){
+            owner.PlayAudio(1);//告诉宿主播放音效
+            Destroy(other.gameObject);//销毁捡到的物品
         }
     }
 

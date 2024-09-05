@@ -30,7 +30,7 @@ public class BaseObject : MonoBehaviour
         }
     }
 
-    protected void PlayAudio(int index){
+    public void PlayAudio(int index){
         audioSource.PlayOneShot(audioClips[index]);
     }
 
@@ -43,7 +43,10 @@ public class BaseObject : MonoBehaviour
     /// 死亡
     /// </summary>
     protected virtual void Dead(){
-        
+        if(lootObject != null){
+            Instantiate(lootObject,transform.position+ new Vector3(Random.Range(-0.5f,0.5f),Random.Range(1f,1.2f), Random.Range(-0.5f, 0.5f)),
+            Quaternion.identity,null);
+        }
     }
 
     /// <summary>
