@@ -12,9 +12,9 @@ public class TreeController : BaseObject
 
     public override void Hurt(int damage)
     {
+        PlayAudio(0);
         base.Hurt(damage);
         animator.SetTrigger("Hurt");
-        PlayAudio(0);
     }
 
     protected override void Dead()
