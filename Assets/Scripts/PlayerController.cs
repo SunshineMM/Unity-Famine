@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 
 public class PlayerController : BaseObject
@@ -17,6 +18,7 @@ public class PlayerController : BaseObject
 
     private float hungry = 100f;
 
+    private bool isHurt = false;
     public float Hungry { get => hungry; 
     set{
         hungry = value;
@@ -50,7 +52,8 @@ public class PlayerController : BaseObject
     void Update()
     {
         UpdateHungry();
-        if(!isAttacking){
+        //既不在攻击中，也不在受伤中        
+        if(!isAttacking && !isHurt){
             Move();
             Attack();
         }else{
@@ -87,7 +90,11 @@ public class PlayerController : BaseObject
     private void Attack(){
         //检测攻击按键
         if(Input.GetMouseButton(0)){
-           
+            //当前鼠标正在交互UI
+            if(UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()){
+                return;
+            }
+
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out RaycastHit hisInfo,100,LayerMask.GetMask("Ground"))){
                 //说明碰到地面了
                 animator.SetTrigger("Attack");
@@ -107,10 +114,25 @@ public class PlayerController : BaseObject
         Hungry -= Time.deltaTime * 3;
     }
 
+    public override void Hurt(int damage)
+    {
+        base.Hurt(damage);
+        animator.SetTrigger("Hurt");
+        PlayAudio(2);
+        isHurt = true;
+    }
+
     protected override void OnHpUpdate()
     {
         //更新血条
         hpImg.fillAmount = Hp / 100;
+    }
+
+
+    public override bool AddItem(ItemType itemType)
+    {
+        //检测背包能不能放下
+        return UIBagPanel.Instance.AddItem(itemType);
     }
 
     #region 动画事件
@@ -125,6 +147,10 @@ public class PlayerController : BaseObject
         //停止攻击检测
         isAttacking =  false;
         checkController.StopHit();
+    }
+
+    private void HurtOver(){
+        isHurt = false;
     }
     #endregion
 }

@@ -7,7 +7,7 @@ public class CheckController : MonoBehaviour
 {
     private BaseObject owner;
     private int damge;
-    private bool canAttack = false;
+    private bool canHit = false;
 
     public List<String> enemyTags = new List<string>();
     public List<String> itemTags = new List<string>();
@@ -22,7 +22,7 @@ public class CheckController : MonoBehaviour
     /// </summary>
     public void StartHIt()
     {
-        canAttack = true;
+        canHit = true;
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ public class CheckController : MonoBehaviour
     /// </summary>
     public void StopHit()
     {
-        canAttack = false;
+        canHit = false;
         lastAttackObjectList.Clear();
     }
 
@@ -39,7 +39,7 @@ public class CheckController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //如果当前允许伤害检测
-        if (canAttack)
+        if (canHit)
         {
             //此次伤害还没有检测过这个单位 && 标签包含在敌人列表中
             if (!lastAttackObjectList.Contains(other.gameObject) && enemyTags.Contains(other.tag))
@@ -53,8 +53,13 @@ public class CheckController : MonoBehaviour
 
         //检测拾取
         if(itemTags.Contains(other.tag)){
-            owner.PlayAudio(1);//告诉宿主播放音效
-            Destroy(other.gameObject);//销毁捡到的物品
+    
+            //把捡到的东西的tag 转枚举
+            ItemType itemType =  System.Enum.Parse<ItemType>(other.tag);
+            if(owner.AddItem(itemType)){
+                owner.PlayAudio(1);//告诉宿主播放音效
+                Destroy(other.gameObject);//销毁捡到的物品
+            }
         }
     }
 

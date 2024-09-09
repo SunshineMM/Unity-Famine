@@ -57,15 +57,11 @@ public class BaseObject : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    /// <summary>
+    /// 添加物品
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool AddItem(ItemType itemType){
+        return false;
     }
 }
