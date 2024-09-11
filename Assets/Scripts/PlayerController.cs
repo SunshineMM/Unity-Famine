@@ -19,6 +19,8 @@ public class PlayerController : BaseObject
     private float hungry = 100f;
 
     private bool isHurt = false;
+
+    public bool isDarging = false; //当前在拖拽中
     public float Hungry { get => hungry; 
     set{
         hungry = value;
@@ -90,8 +92,8 @@ public class PlayerController : BaseObject
     private void Attack(){
         //检测攻击按键
         if(Input.GetMouseButton(0)){
-            //当前鼠标正在交互UI
-            if(UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()){
+            //当前在拖拽 || 当前鼠标正在交互UI
+            if(isDarging || UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()){
                 return;
             }
 
@@ -134,6 +136,25 @@ public class PlayerController : BaseObject
         //检测背包能不能放下
         return UIBagPanel.Instance.AddItem(itemType);
     }
+
+    /// <summary>
+    /// 使用物品
+    /// </summary>
+    /// <returns></returns>
+    public bool UseItem(ItemType itemType){
+        switch (itemType){
+            case ItemType.Meat:
+                Hp += 20;
+                Hungry += 20;
+                return true;
+            case ItemType.CookedMeat:
+                Hp += 30;
+                Hungry += 30;
+                return true;
+        }
+        return false;
+    }
+
 
     #region 动画事件
     private void StartHit(){

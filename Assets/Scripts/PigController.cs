@@ -109,6 +109,7 @@ public class PigController : BaseObject
          EnemyState = EnemyState.Move;
     }
 
+
     /// <summary>
     /// 获取一个范围内的随机点
     /// </summary>
